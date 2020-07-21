@@ -32,6 +32,8 @@ export class AuthInterceptor implements HttpInterceptor {
                 if(err.status == 404){
                     const errors = err.error;
                     this.snackBar.error(errors.message);
+                }else{
+                  this.snackBar.error("something wrong");
                 }
                 // errorMsg = `Error Code: ${err.status},  Message: ${err.message}`;
             //   console.log(err);

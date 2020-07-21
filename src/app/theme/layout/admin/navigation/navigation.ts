@@ -65,6 +65,14 @@ const NavigationItems = [
         icon: 'feather icon-bell'
       },
       {
+        id: 'user-management',
+        title: 'User Management',
+        type: 'item',
+        url: '/user-management',
+        classes: 'nav-item',
+        icon: 'feather icon-user'
+      },
+      {
         id: 'sample-page',
         title: 'Sample Page',
         type: 'item',
