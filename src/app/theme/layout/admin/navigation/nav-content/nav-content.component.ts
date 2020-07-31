@@ -4,6 +4,7 @@ import { NextConfig } from '../../../../../app-config';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { SnackbarService } from 'src/app/misc/snackbar.service';
+import { LoginService } from 'src/app/auth/login.service';
 
 @Component({
   selector: 'app-nav-content',
@@ -28,7 +29,7 @@ export class NavContentComponent implements OnInit, AfterViewInit {
 
   constructor(
     public nav: NavigationItem, private zone: NgZone, private location: Location,
-    private router: Router, private snackBar: SnackbarService
+    private router: Router, private snackBar: SnackbarService, private loginService: LoginService
     ) {
     this.nextConfig = NextConfig.config;
     this.windowWidth = window.innerWidth;
@@ -152,9 +153,14 @@ export class NavContentComponent implements OnInit, AfterViewInit {
   }
 
   logout(){
-    this.snackBar.success("Logout Successfull.");
-    localStorage.removeItem("token");
-    this.router.navigateByUrl("/");
+    this.loginService.logout().subscribe( res => {
+      if(res.status === 'success'){
+        this.snackBar.success('Logout Successful');
+        localStorage.removeItem('token');
+        localStorage.removeItem('users');
+        this.router.navigateByUrl('/');
+      }
+    });
   }
 
 }

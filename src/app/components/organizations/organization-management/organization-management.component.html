@@ -1,0 +1,224 @@
+<div class="row">
+
+  <!-- <div class="col-sm-12">
+    <span style="float:right" class="mb-2">
+    <button type="button" class="btn btn-primary" data-toggle="modal"
+     (click)="orgnizationModel.show()">Create Organization </button>
+    </span>
+  </div> -->
+
+  <!-- <div class="col-sm-12">
+    <app-card cardTitle="" cardClass="" [options]="false">
+      <div class="table-responsive">
+        <table datatable [dtOptions]="dtOptions" class="row-border hover">
+          <thead>
+            <tr>
+              <th>Sr</th>
+              <th>Org Name</th>
+              <th>Email</th>
+              <th>Address</th>
+              <th>Contact</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let org of OrgListArr">
+              <td>{{ org.id }}</td>
+              <td>{{org.name}}</td>
+              <td>{{org.email}}</td>
+              <td>{{org.address}}</td>
+              <td>{{org.contact}}</td>
+            <td>
+                <button type ="button" class="btn btn-success mr-1" id="updateForm" data-toggle="modal"
+                (click)="orgnizationModel.show()" >Edit</button>
+              <button type ="button" class="btn btn-success" data-toggle="modal"
+                (click)="deleteModel.show()">Delete</button>
+            </td>
+            </tr>
+          </tbody>
+          </table>
+      </div>
+    </app-card>
+  </div> -->
+
+  <div class="col-sm-12">
+    <button class="btn btn-primary btn-crt" data-toggle="modal" (click)="orgnizationModel.show(); reset()" > Create Organization </button> 
+    <app-card cardTitle="" cardClass="card-datatable" [options]="false">
+    <div class="table-responsive">
+      <!-- <table datatable [dtOptions]="dtResponsiveOptions" class="table table-striped table-bordered table-hover"></table> -->
+      <table datatable class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Sr</th>
+            <th>Organization Name</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Contact</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+         <tbody>
+          <tr *ngFor="let org of OrgListArr; let i=index;">
+            <td>{{ i+1 }}</td>
+            <td>{{org.name}}</td>
+            <td>{{org.email}}</td>
+            <td>{{org.address}}</td>
+            <td>{{org.contact}}</td>
+            <td>
+              <button class="btn btn-sm btn-info mr-2" title="Edit" (click)="onEditPopup(org); orgnizationModel.show()"> <i class="feather icon-edit"> </i>  </button> 
+              <button class="btn btn-sm btn-danger" title="Delete" (click)="onDeletePopup(org._id); deleteModel.show();"> <i class="feather icon-trash"> </i>  </button> 
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </app-card>
+</div>
+
+</div>
+
+
+
+<!-- Add / Update org Form -->
+ <div class="col-xl-6 col-md-12" [style.display]="isVisible ? 'block' : 'none'">
+    <app-ui-modal #orgnizationModel dialogClass="modal-dialog-centered">
+      <div class="app-modal-header">
+        <h5 class="modal-title">Organization Form</h5>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="orgnizationModel.hide()">
+        <span aria-hidden="true">&times;</span>
+       </button>
+      </div>
+      <div class="app-modal-body">
+        <form [formGroup]="orgnizationForm" class="editForm" novalidate (ngSubmit)="onSubmit(orgnizationForm.value)" >
+          
+          <input type="hidden" formControlName="id">
+          
+          <div class="row">
+           
+            <div class="form-group full-width">
+              <mat-form-field appearance="fill" class="full-width">
+                  <mat-label class="mat-label">Organization Name</mat-label>
+                  <input matInput placeholder="Enter admin name" formControlName="name" required>
+                  <mat-error *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                    <mat-error *ngIf="f.name.errors.required">Organization name is required</mat-error>
+                </mat-error>
+                </mat-form-field>
+          </div>
+
+            <div class="form-group full-width">
+              <mat-form-field appearance="fill" class="full-width">
+                  <mat-label class="mat-label">Email</mat-label>
+                  <input matInput placeholder="Enter Email" formControlName="email" required>
+                  <mat-error *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <mat-error *ngIf="f.email.errors.required">Email is required</mat-error>
+                    <mat-error *ngIf="f.email.errors.email">Email must be a valid email address</mat-error>
+                </mat-error>
+                </mat-form-field>    
+          </div>
+          <div class="form-group full-width">
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label class="mat-label">Contact</mat-label>
+                <input matInput placeholder="Enter Contact Number" formControlName="contact" required>
+                <mat-error *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+                  <mat-error *ngIf="f.contact.errors.required">mobile number is required</mat-error>
+                <mat-error *ngIf="f.contact.errors.pattern">Please enter 10 digit mobile number </mat-error>
+              </mat-error>
+              </mat-form-field>             
+        </div>
+             
+              <div class="form-group full-width">
+                  <mat-form-field appearance="fill" class="full-width">
+                      <mat-label class="mat-label">Address</mat-label>
+                      <input matInput placeholder="Enter name" formControlName="address" >
+                      <mat-error *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                        <mat-error *ngIf="f.address.errors.required">Address is required</mat-error>
+                    </mat-error>
+                    </mat-form-field>
+              </div>
+             
+           
+          
+          <!-- <div class="input-group mb-3">
+            <input class="form-control" placeholder="Organization Name" formControlName="name" required>
+          </div>
+          <div class="input-group mb-3">
+            <input class="form-control" placeholder="Enter Email" formControlName="email" required>
+            <span *ngIf="submitted && f.email.errors" class="invalid-feedback">
+              <span *ngIf="f.email.errors.required">Email is required</span>
+              <span *ngIf="f.email.errors.email">Email must be a valid email address</span>
+              </span>
+          </div>
+          <div class="input-group mb-3">
+            <input class="form-control" placeholder="Enter Contact Number" formControlName="contact" required>
+          </div>
+          <div class="input-group mb-3">
+            <input class="form-control" placeholder="Enter Address" formControlName="address" required>
+          </div> -->
+          
+          <!-- <br> -->
+        
+          </div>
+          <div class="form-group full-width text-center">
+            <button type="submit" class="btn btn-primary mr-2" data-dismiss="modal"> Submit </button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="orgnizationModel.hide()">Close</button>
+          </div>
+      </form>
+      </div>
+    </app-ui-modal>
+  <!-- </app-card> -->
+</div>
+<!-- End Add org Form -->
+
+
+<!-- Delete org Model -->
+<div class="col-xl-4 col-md-6" [style.display]="isDelete ? 'block' : 'none'">
+    <app-ui-modal #deleteModel >
+      <div class="app-modal-header">
+        <h4 class="modal-title">Confirmation </h4>
+        <button type="button" class="close basic-close" data-dismiss="modal" aria-label="Close" (click)="deleteModel.hide()"><span aria-hidden="true">&times;</span></button>
+      </div>
+      <div class="app-modal-body">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+               <h3>Are you sure ! you want to delete this Organization.</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="app-modal-footer">
+        <div class="form-group text-center">
+          <button type="button" class="btn btn-danger btn-md mr-2" (click)="onOrgDelete()" > Delete </button>
+           <button type="button"  class="btn btn-secondary btn-md" data-dismiss="modal" (click)="deleteModel.hide()"> Cancel </button>
+        </div>
+      </div>
+    </app-ui-modal>
+</div>
+<!--End Delete org Model -->
+
+
+
+
+  <!-- style="background-color: white;" -->
+  <!-- <div class="col-sm-12">
+    <app-card cardTitle="" cardClass="" [options]="false">
+      <div class="table-responsive">
+        <table datatable [dtOptions]="dtOptions" class="table">
+        </table>
+      </div>
+    </app-card>
+  </div> -->
+
+
+<!-- <td>1</td>
+<td>System Architect</td>
+<td>Edinburgh</td>
+<td>Tiger Nixon</td>
+<td>67</td>
+<td>2011/04/25</td>
+<td>$320,800</td>
+<td> -->
+
+
+

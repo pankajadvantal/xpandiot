@@ -70,6 +70,7 @@ $menu-icon-color: #4680ff, #ff5252, #01a9ac ,#536dfe , #00bcd4, $warning-color;
 // Header background
 $color-header-name: blue, red, purple, info, green, dark;
 $color-header-color: $primary-color, $danger-color, $purple-color ,$info-color, $success-color,#101b33;
+$color-header-dark: #101B33, $primary-color, $danger-color, $purple-color ,$info-color, $success-color;
 // Header gradient
 $color-header-grd-name: grd-blue, grd-red, grd-purple, grd-info, grd-green, grd-dark;
 $color-header-grd-color: linear-gradient(to right, $primary-color 0%, #00f2fe 100%),
@@ -92,7 +93,8 @@ $theme-font-family: 'Open Sans', sans-serif;
 $theme-font-size: 14px;
 $theme-background: #ecf0f5;
 $theme-font-color: #373a3c;
-$theme-heading-color: #37474f;
+// $theme-heading-color: #37474f;
+$theme-heading-color: #fff;
 
 $color-name: c-blue,c-red,c-green,c-yellow,c-purple;
 $color-color: $primary-color,$danger-color,$success-color ,$warning-color ,$purple-color;

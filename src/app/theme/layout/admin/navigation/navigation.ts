@@ -27,8 +27,8 @@ export interface Navigation extends NavigationItem {
 
 const NavigationItems = [
   {
-    id: 'other',
-    title: 'Other',
+    id: 'panel',
+    title: 'Admin Panel',
     type: 'group',
     icon: 'feather icon-align-left',
     children: [
@@ -38,7 +38,8 @@ const NavigationItems = [
         type: 'item',
         url: '/dashboard',
         classes: 'nav-item',
-        icon: 'feather icon-home'
+        icon: 'feather icon-home',
+        for: [0, 1, 2]
       },
       {
         id: 'resource-tracking',
@@ -46,7 +47,8 @@ const NavigationItems = [
         type: 'item',
         url: '/resource-tracking',
         classes: 'nav-item',
-        icon: 'feather icon-map-pin'
+        icon: 'feather icon-map-pin',
+        for: [0, 1, 2]
       },
       {
         id: 'inventory',
@@ -54,7 +56,8 @@ const NavigationItems = [
         type: 'item',
         url: '/inventory',
         classes: 'nav-item',
-        icon: 'feather icon-file-text'
+        icon: 'feather icon-file-text',
+        for: [0, 1, 2]
       },
       {
         id: 'alert',
@@ -62,17 +65,37 @@ const NavigationItems = [
         type: 'item',
         url: '/alert',
         classes: 'nav-item',
-        icon: 'feather icon-bell'
+        icon: 'feather icon-bell',
+        for: [0, 1, 2]
       },
       {
         id: 'user-management',
-        title: 'User Management',
+        title: 'Users Management',
         type: 'item',
         url: '/user-management',
         classes: 'nav-item',
-        icon: 'feather icon-user'
+        icon: 'feather icon-users',
+        for: [1, 2]
       },
       {
+        id: 'admin-management',
+        title: 'Admin Management',
+        type: 'item',
+        url: '/admin-management',
+        classes: 'nav-item',
+        icon: 'feather icon-user',
+        for: [2]
+      },
+      {
+        id: 'org-management',
+        title: 'Org Management',
+        type: 'item',
+        url: '/org-management',
+        classes: 'nav-item',
+        icon: 'fa fa-building',
+        for: [2]
+      },
+   /*   {
         id: 'sample-page',
         title: 'Sample Page',
         type: 'item',
@@ -115,7 +138,7 @@ const NavigationItems = [
             ]
           }
         ]
-      }
+      } */
     ]
   }
 ];

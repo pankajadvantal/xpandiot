@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { AuthRoutingModule } from './auth-routing.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthGuard } from './auth.guard';
-import { AuthInterceptor } from './auth.interceptor';
+import { AuthGuard } from './interceptor/auth.guard';
+import { AuthInterceptor } from './interceptor/auth.interceptor';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ForgotPasswordComponent],
   imports: [
     CommonModule,
-    AuthRoutingModule
+    AuthRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers:[
     // AuthGuard,

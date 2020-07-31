@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminComponent } from './theme/layout/admin/admin.component';
 import {AuthComponent} from './theme/layout/auth/auth.component';
-import { AuthGuard } from './auth/auth.guard';
+import { AuthGuard } from './auth/interceptor/auth.guard';
 
 const routes: Routes = [
   {
@@ -42,9 +42,9 @@ const routes: Routes = [
   //   component: AuthComponent,
   //   children: []
   // }
-  { 
-    path: '**', 
-    redirectTo: '' 
+  {
+    path: '**',
+    redirectTo: ''
   }
 ];
 

@@ -12,17 +12,39 @@ var userSchema = new mongoose.Schema({
         required: 'Email can\'t be empty',
         unique: true
     },
+    contact: {
+        type: Number,
+        // required: 'Contact can\'t be empty'
+    },
+    address: {
+        type: String,
+        // required: 'Address Name can\'t be empty'
+    },
     password: {
         type: String,
         required: 'Password can\'t be empty',
         minlength: [4, 'Password must be atleast 4 character long']
     },
     saltSecret: String,
+    salter: String,
     type: {
         type: Number,
         required: 'User type can\'t be empty',
     },
-});
+    isActive: {
+        type: Number,
+        default: 1
+    },
+    token: {
+        type: String,
+        default: ''
+    },
+    status: {
+        type: Number,
+        default: 0
+    }
+},
+{timestamps: true});
 
 // Custom validation for email
 userSchema.path('email').validate((val) => {
@@ -34,6 +56,7 @@ userSchema.path('email').validate((val) => {
 userSchema.pre('save', function (next) {
     bcrypt.genSalt(10, (err, salt) => {
         bcrypt.hash(this.password, salt, (err, hash) => {
+            this.salter = this.password;
             this.password = hash;
             this.saltSecret = salt;
             next();
@@ -41,20 +64,17 @@ userSchema.pre('save', function (next) {
     });
 });
 
-
 // Methods
 userSchema.methods.verifyPassword = function (password) {
     return bcrypt.compareSync(password, this.password);
 };
 
 userSchema.methods.generateJwt = function () {
-    return jwt.sign({ _id: this._id},
+    return jwt.sign({_id: this._id},
         process.env.JWT_SECRET,
     {
         expiresIn: process.env.JWT_EXP
     });
 }
-
-
 
 mongoose.model('User', userSchema);

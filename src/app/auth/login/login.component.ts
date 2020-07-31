@@ -33,16 +33,17 @@ export class LoginComponent implements OnInit {
 
   onLogin(data){
     if(!data.email){
-      return this.snackBar.error("Email not found");
+      return this.snackBar.error("Please Enter Email !");
     }
     if(!data.password){
-      return this.snackBar.error("Password not found");
+      return this.snackBar.error("Please Enter Password !");
     }
-   
+    
     this.service.login(data).subscribe((res:any) => {
       if(res.status == "success"){
         this.snackBar.success("Login Successfull.");
-        this.service.setToken(res['token']);
+        this.service.setToken(res.token);
+        this.service.setUsersData(res.user);
         this.router.navigate(['/dashboard']);
       }else{
         this.snackBar.error("Login unSuccessfull.");

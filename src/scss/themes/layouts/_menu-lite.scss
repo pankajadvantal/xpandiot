@@ -3235,7 +3235,7 @@ body {
         $i: index($color-header-name, $value);
 
         &.background-#{$value} {
-            background: nth($color-header-color,$i);
+            background: nth($color-header-dark,$i);
 
             .pcoded-navbar.theme-horizontal ~ .pcoded-header[class*="header-"] {
                 background: nth($color-header-color,$i);

@@ -27,14 +27,19 @@ import { ToggleFullScreenDirective } from './theme/shared/full-screen/toggle-ful
 import { NavigationItem } from './theme/layout/admin/navigation/navigation';
 import { NgbButtonsModule, NgbDropdownModule, NgbTabsetModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './auth/login/login.component';
-import { AuthGuard } from './auth/auth.guard';
-import { AuthInterceptor } from './auth/auth.interceptor';
+import { AuthGuard } from './auth/interceptor/auth.guard';
+import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
 import { SharedComponentsModule } from './components/shared-components.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LoginService } from './auth/login.service';
 import { SnackbarService } from './misc/snackbar.service';
 
+import { DataTablesModule } from 'angular-datatables';
+
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule} from '@angular/material/input';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -68,7 +73,11 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     FormsModule,
     HttpClientModule,
     SharedComponentsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    DataTablesModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatDialogModule
   ],
   providers: [
     NavigationItem,

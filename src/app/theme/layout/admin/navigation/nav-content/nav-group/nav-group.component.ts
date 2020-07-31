@@ -2,6 +2,7 @@ import {Component, Input, NgZone, OnInit} from '@angular/core';
 import {NavigationItem} from '../../navigation';
 import {Location} from '@angular/common';
 import {NextConfig} from '../../../../../../app-config';
+import { SharedService } from 'src/app/components/shared.service';
 
 @Component({
   selector: 'app-nav-group',
@@ -13,9 +14,15 @@ export class NavGroupComponent implements OnInit {
   @Input() layout1: boolean = false;
   @Input() activeId: any;
   public nextConfig: any;
+  type: number;
 
-  constructor(private zone: NgZone, private location: Location) {
+  constructor(
+    private zone: NgZone,
+    private location: Location,
+    private service: SharedService
+    ) {
     this.nextConfig = NextConfig.config;
+    this.type = this.service.getUsersData().type;
   }
 
   ngOnInit() {

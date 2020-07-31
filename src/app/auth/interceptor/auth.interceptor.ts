@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { tap, catchError } from 'rxjs/operators';
-import { LoginService } from './login.service';
-import { SnackbarService } from '../misc/snackbar.service';
+import { LoginService } from './../login.service';
+import { SnackbarService } from '../../misc/snackbar.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
@@ -29,11 +29,13 @@ export class AuthInterceptor implements HttpInterceptor {
               }
               else {
                 console.log('this is server side error');
-                if(err.status == 404){
-                    const errors = err.error;
-                    this.snackBar.error(errors.message);
+                const errors = err.error;
+                if (errors.status === 'error'){
+                  this.snackBar.error(errors.message);
+                }else if (err.status === 0){
+                  this.snackBar.error('Server Error');
                 }else{
-                  this.snackBar.error("something wrong");
+                  this.snackBar.error('something wrong');
                 }
                 // errorMsg = `Error Code: ${err.status},  Message: ${err.message}`;
             //   console.log(err);
